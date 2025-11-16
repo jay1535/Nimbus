@@ -1,6 +1,6 @@
 # 🌩️ Nimbus  – Modern Weather Application
 
-Nimbus Lite is a fast, elegant, and minimal weather app built using **React + TypeScript + Vite**, styled with **Tailwind CSS** and enhanced with **shadcn/ui** components. The app provides accurate weather data, search history, geolocation support, and a clean UI optimized for both dark and light modes.
+Nimbus is a fast, elegant, and minimal weather app built using **React + TypeScript + Vite**, styled with **Tailwind CSS** and enhanced with **shadcn/ui** components. The app provides accurate weather data, search history, geolocation support, and a clean UI optimized for both dark and light modes.
 
 ---
 
