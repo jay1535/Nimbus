@@ -22,7 +22,6 @@ interface DailyForecast {
 }
 
 export function WeatherForecast({ data }: WeatherForecastProps) {
-  // Group forecast by day and get daily min/max
   const dailyForecasts = data.list.reduce((acc, forecast) => {
     const date = format(new Date(forecast.dt * 1000), "yyyy-MM-dd");
 
@@ -43,10 +42,8 @@ export function WeatherForecast({ data }: WeatherForecastProps) {
     return acc;
   }, {} as Record<string, DailyForecast>);
 
-  // Get next 5 days
   const nextDays = Object.values(dailyForecasts).slice(1, 6);
 
-  // Format temperature
   const formatTemp = (temp: number) => `${Math.round(temp)}°`;
 
   return (
@@ -54,13 +51,20 @@ export function WeatherForecast({ data }: WeatherForecastProps) {
       <CardHeader>
         <CardTitle>5-Day Forecast</CardTitle>
       </CardHeader>
+
       <CardContent>
         <div className="grid gap-4">
           {nextDays.map((day) => (
             <div
               key={day.date}
-              className="grid grid-cols-3 items-center gap-4 rounded-lg border p-4"
+              className="
+                grid grid-cols-1 sm:grid-cols-3 
+                items-center gap-4 
+                rounded-lg border p-4
+                text-center sm:text-left
+              "
             >
+              {/* Date + Weather */}
               <div>
                 <p className="font-medium">
                   {format(new Date(day.date * 1000), "EEE, MMM d")}
@@ -70,7 +74,8 @@ export function WeatherForecast({ data }: WeatherForecastProps) {
                 </p>
               </div>
 
-              <div className="flex justify-center gap-4">
+              {/* Temperature */}
+              <div className="flex justify-center gap-6 sm:gap-4">
                 <span className="flex items-center text-blue-500">
                   <ArrowDown className="mr-1 h-4 w-4" />
                   {formatTemp(day.temp_min)}
@@ -81,11 +86,13 @@ export function WeatherForecast({ data }: WeatherForecastProps) {
                 </span>
               </div>
 
-              <div className="flex justify-end gap-4">
+              {/* Humidity + Wind */}
+              <div className="flex justify-center sm:justify-end gap-6 sm:gap-4">
                 <span className="flex items-center gap-1">
                   <Droplets className="h-4 w-4 text-blue-500" />
                   <span className="text-sm">{day.humidity}%</span>
                 </span>
+
                 <span className="flex items-center gap-1">
                   <Wind className="h-4 w-4 text-blue-500" />
                   <span className="text-sm">{day.wind}m/s</span>

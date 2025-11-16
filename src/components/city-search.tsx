@@ -29,7 +29,6 @@ export function CitySearch() {
   const handleSelect = (cityData: string) => {
     const [lat, lon, name, country] = cityData.split("|");
 
-    // Add to search history
     addToHistory.mutate({
       query,
       name,
@@ -44,27 +43,37 @@ export function CitySearch() {
 
   return (
     <>
+      {/* Button now full-width on small screens */}
       <Button
         variant="outline"
-        className="relative w-full justify-start text-sm text-muted-foreground sm:pr-12 md:w-40 lg:w-64"
+        className="relative w-full sm:w-40 lg:w-64 justify-start text-sm text-muted-foreground sm:pr-12"
         onClick={() => setOpen(true)}
       >
         <Search className="mr-2 h-4 w-4" />
         Search cities...
       </Button>
-      <CommandDialog open={open} onOpenChange={setOpen}>
-        <Command>
+
+      {/* Full-screen modal on mobile */}
+      <CommandDialog
+        open={open}
+        onOpenChange={setOpen}
+        className="sm:max-w-lg sm:rounded-lg max-h-screen h-full sm:h-auto"
+      >
+        <Command className="h-full sm:h-auto">
+          {/* Larger input on mobile */}
           <CommandInput
+            className="text-base py-3"
             placeholder="Search cities..."
             value={query}
             onValueChange={setQuery}
           />
-          <CommandList>
+
+          <CommandList className="max-h-[85vh] sm:max-h-[400px] overflow-y-auto">
             {query.length > 2 && !isLoading && (
               <CommandEmpty>No cities found.</CommandEmpty>
             )}
 
-            {/* Favorites Section */}
+            {/* Favorites */}
             {favorites.length > 0 && (
               <CommandGroup heading="Favorites">
                 {favorites.map((city) => (
@@ -72,6 +81,7 @@ export function CitySearch() {
                     key={city.id}
                     value={`${city.lat}|${city.lon}|${city.name}|${city.country}`}
                     onSelect={handleSelect}
+                    className="py-3"
                   >
                     <Star className="mr-2 h-4 w-4 text-yellow-500" />
                     <span>{city.name}</span>
@@ -88,7 +98,7 @@ export function CitySearch() {
               </CommandGroup>
             )}
 
-            {/* Search History Section */}
+            {/* Search History */}
             {history.length > 0 && (
               <>
                 <CommandSeparator />
@@ -106,11 +116,13 @@ export function CitySearch() {
                       Clear
                     </Button>
                   </div>
+
                   {history.map((item) => (
                     <CommandItem
                       key={item.id}
                       value={`${item.lat}|${item.lon}|${item.name}|${item.country}`}
                       onSelect={handleSelect}
+                      className="py-3"
                     >
                       <Clock className="mr-2 h-4 w-4 text-muted-foreground" />
                       <span>{item.name}</span>
@@ -131,8 +143,9 @@ export function CitySearch() {
               </>
             )}
 
-            {/* Search Results */}
             <CommandSeparator />
+
+            {/* Search Results */}
             {locations && locations.length > 0 && (
               <CommandGroup heading="Suggestions">
                 {isLoading && (
@@ -140,11 +153,13 @@ export function CitySearch() {
                     <Loader2 className="h-4 w-4 animate-spin" />
                   </div>
                 )}
-                {locations?.map((location) => (
+
+                {locations.map((location) => (
                   <CommandItem
                     key={`${location.lat}-${location.lon}`}
                     value={`${location.lat}|${location.lon}|${location.name}|${location.country}`}
                     onSelect={handleSelect}
+                    className="py-3"
                   >
                     <Search className="mr-2 h-4 w-4" />
                     <span>{location.name}</span>
