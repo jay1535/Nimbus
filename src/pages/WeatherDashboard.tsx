@@ -1,8 +1,9 @@
 import WeatherSkeleton from "@/components/loading-skeleton";
 import { Button } from "@/components/ui/button";
-import { useGeolocation } from "@/hooks/use-geolocation";
+
 import { AlertTriangle, MapPin, RefreshCcw } from "lucide-react";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
+import { useGeolocation } from "@/hooks/use-geolocation";
 
 const WeatherDashboard = () => {
   const {coordinates, 
