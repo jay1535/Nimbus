@@ -1,28 +1,27 @@
-import { useTheme } from "@/context/theme-provider";
-import { Moon, Sun } from "lucide-react";
 import { Link } from "react-router-dom";
+import { CitySearch } from "./city-search";
+import { ThemeToggle } from "./theme-toggle";
+import { useTheme } from "@/context/theme-provider";
 
+export function Header() {
+  const { theme } = useTheme();
 
-const Header = () => {
-
-    const {theme, setTheme} = useTheme();
-    const isDark = theme === "dark";
   return (
-    <header className="sticky top-0 z-50 w-full border rounded-sm bg-background/95 backdrop-blur py-2 supports-backdrop-filter:bg-background/60">
-      <div className="container mx-auto flex h-12 items-center justify-between px-2">
-        <Link to={"/"} className="flex items-center justify-center text-4xl font-bold">
-          <img src={"/vite.svg"} className="p-2" alt="Nimbus Logo" />
-          Nimbus
+    <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-backdrop-filter:bg-background/60 py-2">
+      <div className="container mx-auto flex h-16 items-center justify-between px-4">
+        <Link to={"/"} className="flex text-3xl  items-center justify-center font-bold">
+          <img
+            src={theme === "dark" ? "/vite.svg" : "/vite.svg"}
+            alt="Nimbus logo"
+            className="h-14 p-2"
+          />Nimbus
         </Link>
-        <div>{/* SearchBar  */}
-<div  className={`flex items-center cursor-pointer transition-transform duration-500 ${isDark?"rotate-180":"rotate-0"} rounded-sm`} onClick={() => setTheme(isDark ? "light" : "dark")}>
-   {isDark ? <Sun className="h-5 w-5 text-yellow-300 rotate-0 transition-all"/>:<Moon className="h-5 w-5 text-gray-900 rotate-0 transition-all"/>}
-</div>
 
+        <div className="flex gap-4">
+          <CitySearch />
+          <ThemeToggle />
         </div>
       </div>
     </header>
   );
-};
-
-export default Header;
+}
