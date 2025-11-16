@@ -3,14 +3,21 @@ import { Header } from "./Header";
 
 export function Layout({ children }: PropsWithChildren) {
   return (
-    <div className=" bg-linear-to-br from-background to-muted">
+    <div className="min-h-screen flex flex-col bg-linear-to-br from-background to-muted">
+      {/* Header */}
       <Header />
-      <main className="min-h-screen container mx-auto px-4 py-8">
+
+      {/* Main Content */}
+      <main className="flex-1 w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
         {children}
       </main>
+
+      {/* Footer */}
       <footer className="border-t backdrop-blur supports-backdrop-filter:bg-background/60 py-4">
-        <div className="container mx-auto px-2 text-center text-gray-200">
-          <p>Made with 💗 by jay1535</p>
+        <div className="w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <p className="text-gray-300 text-sm sm:text-base">
+            Made with 💗 by jay1535
+          </p>
         </div>
       </footer>
     </div>
