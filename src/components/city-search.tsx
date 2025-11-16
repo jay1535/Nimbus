@@ -50,7 +50,7 @@ export function CitySearch() {
         onClick={() => setOpen(true)}
       >
         <Search className="mr-2 h-4 w-4" />
-        Search cities...
+        Search 
       </Button>
 
       {/* Full-screen modal on mobile */}
