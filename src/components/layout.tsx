@@ -15,7 +15,7 @@ export function Layout({ children }: PropsWithChildren) {
       {/* Footer */}
       <footer className="border-t backdrop-blur supports-backdrop-filter:bg-background/60 py-4">
         <div className="w-full max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <p className="text-gray-300 text-sm sm:text-base">
+          <p className="text-gray-800 text-sm sm:text-base">
             Made with 💗 by jay1535
           </p>
         </div>
